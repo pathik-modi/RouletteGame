@@ -1,18 +1,28 @@
 import { Router } from 'express'
-
-import * as db from '../db/fruits.ts'
+import { getAllPlayers, updateBalance } from '../db/dbFunctions'
 
 const router = Router()
 
 router.get('/', async (req, res) => {
   try {
-    const fruits = await db.getAllFruits()
-
-    res.json({ fruits: fruits.map((fruit) => fruit.name) })
-  } catch (error) {
-    console.log(error)
-    res.status(500).json({ message: 'Something went wrong' })
+    const player = await getAllPlayers()
+    res.json(player)
+  } catch (err) {
+    console.error(err)
+    res.status(500).json({ error: 'woopsie server error' })
   }
 })
 
 export default router
+
+router.patch('/:id', async (req, res) => {
+  const id = Number(req.params.id)
+  const { balance } = req.body
+  try {
+    await updateBalance(id, balance)
+    res.sendStatus(200)
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ error: 'woopsie server error' })
+  }
+})
