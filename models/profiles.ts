@@ -10,5 +10,4 @@ export interface UpdateBalance {
 
 export interface AddPlayer {
   playerName: string
-  balance: number
 }
