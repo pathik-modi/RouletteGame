@@ -1,8 +1,9 @@
-export interface Fruit {
+export interface profiles {
   id: number
-  name: string
+  playerName: string
+  balance: number
 }
 
-export interface FruitData {
-  name: string
+export interface updateBalance {
+  balance: number
 }
