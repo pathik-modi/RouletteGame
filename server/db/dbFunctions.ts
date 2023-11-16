@@ -24,3 +24,9 @@ export async function addPlayer(player: AddPlayer) {
 export async function delPlayer(id: number) {
   return db('profiles').where({ id }).del()
 }
+
+//get one player with id
+
+export async function getOnePlayer(id: number) {
+  return db('profiles').where({ id }).select()
+}
