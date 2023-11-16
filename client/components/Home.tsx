@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { getAllProfiles } from '../apis/fruits'
 import { Link } from 'react-router-dom'
+import { Profiles } from '../../models/profiles'
 
 function Home() {
   const { data, isLoading, error } = useQuery({
@@ -17,15 +18,13 @@ function Home() {
 
   return (
     <>
-      <div>Home Page</div>
-      <div>Start Game</div>
       <div>
         Choose Player
         <ul>
-          {data?.map((profile) => (
-            <li key={profile.id}>
-              <Link to={`/game/${profile.id}`}>
-                {profile.playerName} - {profile.balance}
+          {data?.map((profiles: Profiles) => (
+            <li key={profiles.id}>
+              <Link to={`/game/${profiles.id}`}>
+                {profiles.playerName} - {profiles.balance}
               </Link>
             </li>
           ))}
