@@ -1,5 +1,5 @@
-import { Profiles, AddPlayer } from '../models/fruit'
-import db from './db/connection'
+import { Profiles, AddPlayer } from '../../models/fruit'
+import db from './connection'
 
 // Fuction to read all profiles from data
 
