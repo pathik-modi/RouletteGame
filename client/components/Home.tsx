@@ -25,7 +25,7 @@ function Home() {
           {data?.map((profile) => (
             <li key={profile.id}>
               <Link to={`/game/${profile.id}`}>
-                {profile.player} - {profile.balance}
+                {profile.playerName} - {profile.balance}
               </Link>
             </li>
           ))}
