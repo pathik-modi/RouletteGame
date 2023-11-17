@@ -14,3 +14,10 @@ export async function getAllProfiles() {
 export async function getProfileById(id: number) {
   return await request.get(`${rootUrl}/${id}`).then((res) => res.body)
 }
+interface Props {
+  id: number
+  balance: number
+}
+export async function updatePlayerBalance({ id, balance }: Props) {
+  return await request.patch(`${rootUrl}/${id}`).send({ balance })
+}
