@@ -14,8 +14,8 @@ interface Props {
   id: number
   balance: number
 }
-export async function updatePlayerBalance({ id, balance }: Props) {
-  return await request.patch(`${rootUrl}/${id}`).send({ balance })
+export async function updatePlayerBalance(id: number, balance: number) {
+  return await request.patch(`${rootUrl}/${id}`).send({ balance: balance })
 }
 
 export async function addPlayer(playerName: string) {

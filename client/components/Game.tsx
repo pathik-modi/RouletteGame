@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'react-router-dom'
-import { getProfileById } from '../apis/fruits'
+import { getProfileById, updatePlayerBalance } from '../apis/fruits'
 
 import { useState, useEffect } from 'react'
 
 function Game() {
-  const [balance, setBalance] = useState(2500)
+  const [balance, setBalance] = useState(0)
   const [spin, setSpin] = useState([] as number[])
   const [bets, setBets] = useState(0)
   const initArr = [
@@ -71,7 +71,7 @@ function Game() {
   // }
   // console.log(data[0])
 
-  function handleSpin() {
+  async function handleSpin() {
     const dealer = Math.floor(Math.random() * 36) + 1
     const winValue = cells.find((cell) => cell.number === dealer)
       ?.value as number
@@ -99,14 +99,18 @@ function Game() {
     if (winValue !== 0) {
       setBalance(win())
       console.log('you win')
+      await updatePlayerBalance(playerId, win())
       alert(`Lucky number is ${dealer}, You win ${win() - balance} dollars!`)
     } else {
       setBalance(lose())
       console.log('you lose')
+      await updatePlayerBalance(playerId, lose())
       alert(
         `Lucky number is ${dealer}, You lose ${-(lose() - balance)} dollars!`,
       )
     }
+
+    console.log(playerId, balance)
 
     setCells(initArr)
     setSpin([...spin, dealer])
