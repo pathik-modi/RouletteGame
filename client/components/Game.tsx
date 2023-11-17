@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'react-router-dom'
 import { getProfileById } from '../apis/fruits'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 function Game() {
   const [balance, setBalance] = useState(2500)
@@ -51,19 +51,25 @@ function Game() {
   const { id } = useParams()
   const playerId = Number(id)
 
-  const { isLoading, error, data } = useQuery({
-    queryKey: ['profile'],
-    queryFn: () => getProfileById(playerId),
-  })
+  useEffect(() => {
+    getProfileById(playerId)
+      .then((playerData) => setBalance(playerData[0].balance))
+      .catch((error) => console.error(error))
+  }, [])
 
-  if (isLoading) {
-    return 'Loading...'
-  }
+  // const { isLoading, error, data } = useQuery({
+  //   queryKey: ['profile'],
+  //   queryFn: () => getProfileById(playerId),
+  // })
 
-  if (error) {
-    return 'An error has occurred: ' + error
-  }
-  console.log(data[0])
+  // if (isLoading) {
+  //   return 'Loading...'
+  // }
+
+  // if (error) {
+  //   return 'An error has occurred: ' + error
+  // }
+  // console.log(data[0])
 
   function handleSpin() {
     const dealer = Math.floor(Math.random() * 36) + 1
@@ -109,13 +115,13 @@ function Game() {
 
   return (
     <>
-      <div>
+      {/* <div>
         <div>Player Name: {data[0].playerName}</div>
         <div>Player Balance: ${data[0].balance}</div>
-      </div>
+      </div> */}
       <div>
         <p>This is game page</p>
-        <h2>Welcom player: {data[0].playerName}</h2>
+        {/* <h2>Welcom player: {data[0].playerName}</h2> */}
         <h2>Balance: {balance}</h2>
         <div className="cellsContainer">
           {cells
