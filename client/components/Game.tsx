@@ -8,6 +8,7 @@ function Game() {
   const [balance, setBalance] = useState(0)
   const [spin, setSpin] = useState([] as number[])
   const [bets, setBets] = useState(0)
+  const [playerName, setPlayerName] = useState('')
   const initArr = [
     { number: 1, value: 0 },
     { number: 2, value: 0 },
@@ -53,7 +54,10 @@ function Game() {
 
   useEffect(() => {
     getProfileById(playerId)
-      .then((playerData) => setBalance(playerData[0].balance))
+      .then((playerData) => {
+        setBalance(playerData[0].balance)
+        setPlayerName(playerData[0].playerName)
+      })
       .catch((error) => console.error(error))
   }, [])
 
@@ -124,9 +128,13 @@ function Game() {
         <div>Player Balance: ${data[0].balance}</div>
       </div> */}
       <div>
-        <p>This is game page</p>
         {/* <h2>Welcom player: {data[0].playerName}</h2> */}
-        <h2>Balance: {balance}</h2>
+
+        <div className="gamePagePlayerDetails">
+          <h2>Player Name: {playerName}</h2>
+          <h2>Balance: {balance}</h2>
+        </div>
+
         <div className="cellsContainer">
           {cells
             .sort(function (a, b) {
@@ -160,13 +168,17 @@ function Game() {
             ))}
           <br />
         </div>
-        <h2>Bets: {bets}</h2>
-        <button onClick={handleSpin}>Spin</button>
-        {spin.length > 0 && (
-          <h3>{`Current Lucky Number: ${spin[spin.length - 1]}`}</h3>
-        )}
-        <h2>Spin history:</h2>
-        {spin?.map((s) => `${s}/`)}
+        <div className="gamePageSecondSection">
+          <h2>Bets: {bets}</h2>
+          <button onClick={handleSpin}>Spin</button>
+          {spin.length > 0 && (
+            <h3>{`Lucky Number: ${spin[spin.length - 1]}`}</h3>
+          )}
+        </div>
+        <div className="spinHistory">
+          <h2>Spin history:</h2>
+          {spin?.map((s) => `${s} -- `)}
+        </div>
       </div>
     </>
   )

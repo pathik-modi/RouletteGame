@@ -3,11 +3,80 @@
 html, 
 body {
   font-family: 'Montserrat', sans-serif;
-
+background-color: #002800;
+color: aliceblue;
 }
+
+a {
+  color: #e3ae01; /* Change to your desired color */
+}
+
+/* Change the color of links on hover */
+a:hover {
+  color: white; /* Change to your desired hover color */
+}
+
+.gamePagePlayerDetails {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 50px;
+  padding: 10px;
+  }
 
 .cellsContainer {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 10px;
+  justify-content: space-around;
+  margin-left: 200px;
+  margin-right: 200px;
+  margin-bottom: 50px;
+}
+
+.cellsContainer label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 1.2rem;
+}
+
+.cellsContainer input {
+  font-size: 1.2rem;
+  width: 60px;
+  padding: 2px;
+  border: 1px solid red;
+  border-radius: 4px;
+  transition: border-color 0.3s ease; /* Add transition for smoother effect */
+}
+
+.cellsContainer input:not(:placeholder-shown) {
+  border-color: #5cb85c; /* Change to desired color */
+}
+
+.gamePageSecondSection { 
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  margin-left: 500px;
+}
+
+.gamePageSecondSection button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #e3ae01;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+.gamePageSecondSection button:hover {
+  background-color: white;
+}
+
+.spinHistory {
+  text-align: center;
+  font-size: 1.2rem;
 }
