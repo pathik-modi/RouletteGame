@@ -1,7 +1,8 @@
-import { useQuery } from '@tanstack/react-query'
-import { getAllProfiles } from '../apis/fruits'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { addPlayer, getAllProfiles } from '../apis/fruits'
 import { Link } from 'react-router-dom'
 import { Profiles } from '../../models/profiles'
+import AddPlayer from './AddPlayer'
 
 function Home() {
   const { data, isLoading, error } = useQuery({
@@ -31,8 +32,7 @@ function Home() {
         </ul>
       </div>
       <div>
-        Add new Player
-        <form></form>
+        <AddPlayer />
       </div>
     </>
   )
